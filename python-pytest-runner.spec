@@ -3,7 +3,7 @@
 
 Name: python-%{modulename}
 Version: 2.9
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: Invoke py.test as distutils command with dependency resolution
 
 License: MIT
@@ -73,5 +73,8 @@ Python 3 version.
 %{python3_sitelib}/__pycache__/ptr.*
 
 %changelog
+* Tue Dec 13 2016 Stratakis Charalampos <cstratak@redhat.com> - 2.9-2
+- Rebuild for Python 3.6
+
 * Sat Aug 06 2016 Vadim Rutkovsky <vrutkovs@redhat.com> - 2.9-1
 - Initial package
