@@ -3,7 +3,7 @@
 
 Name: python-%{modulename}
 Version: 2.9
-Release: 3%{?dist}
+Release: 4%{?dist}
 Summary: Invoke py.test as distutils command with dependency resolution
 
 License: MIT
@@ -18,6 +18,8 @@ Setup scripts can use pytest-runner to add setup.py test support for pytest runn
 
 %description %{_description}
 
+# Python 2 pytest is too old on EL7
+%if 0%{?fedora}
 %package -n python2-%{modulename}
 Summary:        %{summary}
 %{?python_provide:%python_provide python2-%{modulename}}
@@ -30,42 +32,53 @@ BuildRequires:  python2-pytest
 %description -n python2-%{modulename} %{_description}
 
 Python 2 version.
+%endif
 
-%package -n python3-%{modulename}
+%package -n python%{python3_pkgversion}-%{modulename}
 Summary:        %{summary}
-%{?python_provide:%python_provide python3-%{modulename}}
-Requires:       python3-pytest
-BuildRequires:  python3-devel
-BuildRequires:  python3-setuptools
-BuildRequires:  python3-setuptools_scm
-BuildRequires:  python3-pytest
+%{?python_provide:%python_provide python%{python3_pkgversion}-%{modulename}}
+Requires:       python%{python3_pkgversion}-pytest
+BuildRequires:  python%{python3_pkgversion}-devel
+BuildRequires:  python%{python3_pkgversion}-setuptools
+BuildRequires:  python%{python3_pkgversion}-setuptools_scm
+BuildRequires:  python%{python3_pkgversion}-pytest
 
-%description -n python3-%{modulename} %{_description}
+%description -n python%{python3_pkgversion}-%{modulename} %{_description}
 
-Python 3 version.
+Python %{python3_version} version.
 
 %prep
 %autosetup -n %{modulename}-%{version}
 
 %build
+# Python 2 pytest is too old on EL7
+%if 0%{?fedora}
 %py2_build
+%endif
 %py3_build
 
 %install
+%if 0%{?fedora}
 %py2_install
+%endif
 %py3_install
 
 %check
+%if 0%{?fedora}
 %{__python2} setup.py test
+%endif
 %{__python3} setup.py test
 
+%if 0%{?fedora}
+%package -n python2-%{modulename}
 %files -n python2-%{modulename}
 %doc README.rst
 %license LICENSE
 %{python2_sitelib}/ptr.py*
 %{python2_sitelib}/%{_modulename}-%{version}-py%{python2_version}.egg-info/
+%endif
 
-%files -n python3-%{modulename}
+%files -n python%{python3_pkgversion}-%{modulename}
 %doc README.rst
 %license LICENSE
 %{python3_sitelib}/ptr.py
@@ -73,6 +86,9 @@ Python 3 version.
 %{python3_sitelib}/__pycache__/ptr.*
 
 %changelog
+* Thu Mar 9 2017 Orion Poplawski <orion@cora.nwra.com> - 2.9-4
+- Build python 3 version for EPEL
+
 * Sat Feb 11 2017 Fedora Release Engineering <releng@fedoraproject.org> - 2.9-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_26_Mass_Rebuild
 
