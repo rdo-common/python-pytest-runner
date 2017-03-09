@@ -70,7 +70,6 @@ Python %{python3_version} version.
 %{__python3} setup.py test
 
 %if 0%{?fedora}
-%package -n python2-%{modulename}
 %files -n python2-%{modulename}
 %doc README.rst
 %license LICENSE
