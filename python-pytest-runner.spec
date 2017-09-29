@@ -3,7 +3,7 @@
 
 Name: python-%{modulename}
 Version: 2.9
-Release: 5%{?dist}
+Release: 6%{?dist}
 Summary: Invoke py.test as distutils command with dependency resolution
 
 License: MIT
@@ -19,7 +19,7 @@ Setup scripts can use pytest-runner to add setup.py test support for pytest runn
 %description %{_description}
 
 # Python 2 pytest is too old on EL7
-%if 0%{?fedora}
+%if 0%{?fedora} || 0%{?rhel} > 7
 %package -n python2-%{modulename}
 Summary:        %{summary}
 %{?python_provide:%python_provide python2-%{modulename}}
@@ -52,24 +52,24 @@ Python %{python3_version} version.
 
 %build
 # Python 2 pytest is too old on EL7
-%if 0%{?fedora}
+%if 0%{?fedora} || 0%{?rhel} > 7
 %py2_build
 %endif
 %py3_build
 
 %install
-%if 0%{?fedora}
+%if 0%{?fedora} || 0%{?rhel} > 7
 %py2_install
 %endif
 %py3_install
 
 %check
-%if 0%{?fedora}
+%if 0%{?fedora} || 0%{?rhel} > 7
 %{__python2} setup.py test
 %endif
 %{__python3} setup.py test
 
-%if 0%{?fedora}
+%if 0%{?fedora} || 0%{?rhel} > 7
 %files -n python2-%{modulename}
 %doc README.rst
 %license LICENSE
@@ -85,6 +85,9 @@ Python %{python3_version} version.
 %{python3_sitelib}/__pycache__/ptr.*
 
 %changelog
+* Fri Sep 29 2017 Troy Dawson <tdawson@redhat.com> - 2.9-6
+- Cleanup spec file conditionals
+
 * Thu Jul 27 2017 Fedora Release Engineering <releng@fedoraproject.org> - 2.9-5
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Mass_Rebuild
 
