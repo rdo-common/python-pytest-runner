@@ -2,8 +2,8 @@
 %global _modulename pytest_runner
 
 Name: python-%{modulename}
-Version: 2.9
-Release: 6%{?dist}
+Version: 2.12.1
+Release: 1%{?dist}
 Summary: Invoke py.test as distutils command with dependency resolution
 
 License: MIT
@@ -85,6 +85,9 @@ Python %{python3_version} version.
 %{python3_sitelib}/__pycache__/ptr.*
 
 %changelog
+* Fri Oct 13 2017 Vadim Rutkovsky <vrutkovs@redhat.com> - 2.12.1-1
+-  Update to 2.12.1 (#1487972)
+
 * Fri Sep 29 2017 Troy Dawson <tdawson@redhat.com> - 2.9-6
 - Cleanup spec file conditionals
 
