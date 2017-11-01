@@ -2,7 +2,7 @@
 %global _modulename pytest_runner
 
 Name: python-%{modulename}
-Version: 2.12.1
+Version: 3.0
 Release: 1%{?dist}
 Summary: Invoke py.test as distutils command with dependency resolution
 
@@ -37,7 +37,7 @@ Python 2 version.
 %package -n python%{python3_pkgversion}-%{modulename}
 Summary:        %{summary}
 %{?python_provide:%python_provide python%{python3_pkgversion}-%{modulename}}
-Requires:       python%{python3_pkgversion}-pytest
+Requires:       python%{pythorelease-monitoringn3_pkgversion}-pytest
 BuildRequires:  python%{python3_pkgversion}-devel
 BuildRequires:  python%{python3_pkgversion}-setuptools
 BuildRequires:  python%{python3_pkgversion}-setuptools_scm
@@ -85,6 +85,9 @@ Python %{python3_version} version.
 %{python3_sitelib}/__pycache__/ptr.*
 
 %changelog
+* Thu Nov 02 2017 Vadim Rutkovsky  <vrutkovs@redhat.com> - 3.0-1
+- Update to 3.0 (#1508216)
+
 * Fri Oct 13 2017 Vadim Rutkovsky <vrutkovs@redhat.com> - 2.12.1-1
 -  Update to 2.12.1 (#1487972)
 
