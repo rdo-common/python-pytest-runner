@@ -18,8 +18,6 @@ Setup scripts can use pytest-runner to add setup.py test support for pytest runn
 
 %description %{_description}
 
-# Python 2 pytest is too old on EL7
-%if 0%{?fedora} || 0%{?rhel} > 7
 %package -n python2-%{modulename}
 Summary:        %{summary}
 %{?python_provide:%python_provide python2-%{modulename}}
@@ -32,52 +30,42 @@ BuildRequires:  python2-pytest
 %description -n python2-%{modulename} %{_description}
 
 Python 2 version.
-%endif
 
-%package -n python%{python3_pkgversion}-%{modulename}
+%package -n python3-%{modulename}
 Summary:        %{summary}
-%{?python_provide:%python_provide python%{python3_pkgversion}-%{modulename}}
-Requires:       python%{pythorelease-monitoringn3_pkgversion}-pytest
-BuildRequires:  python%{python3_pkgversion}-devel
-BuildRequires:  python%{python3_pkgversion}-setuptools
-BuildRequires:  python%{python3_pkgversion}-setuptools_scm
-BuildRequires:  python%{python3_pkgversion}-pytest
+%{?python_provide:%python_provide python3-%{modulename}}
+Requires:       python3-pytest
+BuildRequires:  python3-devel
+BuildRequires:  python3-setuptools
+BuildRequires:  python3-setuptools_scm
+BuildRequires:  python3-pytest
 
-%description -n python%{python3_pkgversion}-%{modulename} %{_description}
+%description -n python3-%{modulename} %{_description}
 
-Python %{python3_version} version.
+Python 3 version.
 
 %prep
 %autosetup -n %{modulename}-%{version}
 
 %build
-# Python 2 pytest is too old on EL7
-%if 0%{?fedora} || 0%{?rhel} > 7
 %py2_build
-%endif
 %py3_build
 
 %install
-%if 0%{?fedora} || 0%{?rhel} > 7
 %py2_install
-%endif
 %py3_install
 
 %check
-%if 0%{?fedora} || 0%{?rhel} > 7
 %{__python2} setup.py test
-%endif
 %{__python3} setup.py test
 
-%if 0%{?fedora} || 0%{?rhel} > 7
 %files -n python2-%{modulename}
 %doc README.rst
 %license LICENSE
 %{python2_sitelib}/ptr.py*
 %{python2_sitelib}/%{_modulename}-%{version}-py%{python2_version}.egg-info/
-%endif
 
-%files -n python%{python3_pkgversion}-%{modulename}
+%files -n python3-%{modulename}
 %doc README.rst
 %license LICENSE
 %{python3_sitelib}/ptr.py
