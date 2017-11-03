@@ -3,7 +3,7 @@
 
 Name:           python-%{modulename}
 Version:        3.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Invoke py.test as distutils command with dependency resolution
 
 License:        MIT
@@ -73,6 +73,9 @@ Python 3 version.
 %{python3_sitelib}/__pycache__/ptr.*
 
 %changelog
+* Fri Nov 03 2017 Igor Gnatenko <ignatenkobrain@fedoraproject.org> - 3.0-2
+- Fix broken dep
+
 * Thu Nov 02 2017 Vadim Rutkovsky  <vrutkovs@redhat.com> - 3.0-1
 - Update to 3.0 (#1508216)
 
