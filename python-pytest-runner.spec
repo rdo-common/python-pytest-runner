@@ -1,15 +1,15 @@
 %global modulename pytest-runner
 %global _modulename pytest_runner
 
-Name: python-%{modulename}
-Version: 3.0
-Release: 1%{?dist}
-Summary: Invoke py.test as distutils command with dependency resolution
+Name:           python-%{modulename}
+Version:        3.0
+Release:        1%{?dist}
+Summary:        Invoke py.test as distutils command with dependency resolution
 
-License: MIT
-URL: https://pypi.python.org/pypi/%{modulename}
+License:        MIT
+URL:            https://pypi.python.org/pypi/pytest-runner
 # setuptools-scm requires a pypi tarball and doesn't like github tarball
-Source0: https://files.pythonhosted.org/packages/source/p/%{modulename}/%{modulename}-%{version}.tar.gz
+Source0:        https://files.pythonhosted.org/packages/source/p/%{modulename}/%{modulename}-%{version}.tar.gz
 
 BuildArch: noarch
 
