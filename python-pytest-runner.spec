@@ -2,8 +2,8 @@
 %global _modulename pytest_runner
 
 Name:           python-%{modulename}
-Version:        3.0
-Release:        3%{?dist}
+Version:        4.0
+Release:        1%{?dist}
 Summary:        Invoke py.test as distutils command with dependency resolution
 
 License:        MIT
@@ -73,6 +73,9 @@ Python 3 version.
 %{python3_sitelib}/__pycache__/ptr.*
 
 %changelog
+* Sun Feb 11 2018 Vadim Rutkovsky <vrutkovs@redhat.com> - 4.0-1
+- Update to 4.0 (#1544167)
+
 * Fri Feb 09 2018 Fedora Release Engineering <releng@fedoraproject.org> - 3.0-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_28_Mass_Rebuild
 
