@@ -3,7 +3,7 @@
 
 Name:           python-%{modulename}
 Version:        4.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Invoke py.test as distutils command with dependency resolution
 
 License:        MIT
@@ -73,6 +73,9 @@ Python 3 version.
 %{python3_sitelib}/__pycache__/ptr.*
 
 %changelog
+* Fri Jun 15 2018 Miro Hrončok <mhroncok@redhat.com> - 4.0-2
+- Rebuilt for Python 3.7
+
 * Sun Feb 11 2018 Vadim Rutkovsky <vrutkovs@redhat.com> - 4.0-1
 - Update to 4.0 (#1544167)
 
