@@ -1,6 +1,10 @@
 %global modulename pytest-runner
 %global _modulename pytest_runner
 
+%if 0%{?fedora} || 0%{?rhel} > 7
+%global with_python3 1
+%endif
+
 Name:           python-%{modulename}
 Version:        4.0
 Release:        3%{?dist}
@@ -31,6 +35,7 @@ BuildRequires:  python2-pytest
 
 Python 2 version.
 
+%if 0%{?with_python3}
 %package -n python3-%{modulename}
 Summary:        %{summary}
 %{?python_provide:%python_provide python3-%{modulename}}
@@ -43,21 +48,30 @@ BuildRequires:  python3-pytest
 %description -n python3-%{modulename} %{_description}
 
 Python 3 version.
+%endif
 
 %prep
 %autosetup -n %{modulename}-%{version}
+# (TODO) We have setuptools_scm 1.10.0 in RDO which is good enough to build it.
+sed -i 's/setuptools_scm>=1.15.0/setuptools_scm/g' setup.py
 
 %build
 %py2_build
+%if 0%{?with_python3}
 %py3_build
+%endif
 
 %install
 %py2_install
+%if 0%{?with_python3}
 %py3_install
+%endif
 
 %check
 %{__python2} setup.py test
+%if 0%{?with_python3}
 %{__python3} setup.py test
+%endif
 
 %files -n python2-%{modulename}
 %doc README.rst
@@ -65,12 +79,14 @@ Python 3 version.
 %{python2_sitelib}/ptr.py*
 %{python2_sitelib}/%{_modulename}-%{version}-py%{python2_version}.egg-info/
 
+%if 0%{?with_python3}
 %files -n python3-%{modulename}
 %doc README.rst
 %license LICENSE
 %{python3_sitelib}/ptr.py
 %{python3_sitelib}/%{_modulename}-%{version}-py%{python3_version}.egg-info/
 %{python3_sitelib}/__pycache__/ptr.*
+%endif
 
 %changelog
 * Sat Jul 14 2018 Fedora Release Engineering <releng@fedoraproject.org> - 4.0-3
